@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聊天机器人</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #chatbox {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        #user_input {
+            width: 80%;
+            padding: 10px;
+        }
+        #send {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chat</h1>
+    <div id="chatbox"></div>
+    <input type="text" id="user_input" placeholder="输入你的问题..." />
+    <button id="send">发送</button>
+
+    <script>
+        $(document).ready(function() {
+            $('#send').click(function() {
+                var userInput = $('#user_input').val();
+                if (userInput) {
+                    $('#chatbox').append('<div>用户: ' + userInput + '</div>');
+                    $('#user_input').val('');
+
+                    $.ajax({
+                        url: 'http://localhost:8000/chat', // 你的后端服务地址
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ query: userInput }),
+                        success: function(response) {
+                            $('#chatbox').append('<div>小机器人: ' + response.response + '</div>');
+                            $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight); // 滚动到底部
+                        },
+                        error: function() {
+                            $('#chatbox').append('<div>小机器人: 请求失败，请重试。</div>');
+                        }
+                    });
+                }
+            });
+
+            $('#user_input').keypress(function(event) {
+                if (event.which === 13) {
+                    $('#send').click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
