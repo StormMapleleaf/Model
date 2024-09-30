@@ -1,3 +1,7 @@
+#                        说白了                       // 
+#                    所谓AI记忆存储                   //
+#            只是将所有的输入与回复重新过一遍          //
+#                   然后只输出最后一句               //
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import START, MessagesState, StateGraph
 from model_init import model,ans_format
