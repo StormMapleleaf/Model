@@ -6,9 +6,17 @@
 
 ## Content
 
+- covert.py //转换模型
+
 ------
 
 ## Use
+
+```
+python convert.py 输入文件.mkv
+```
+
+
 
 ------
 
