@@ -1,3 +1,19 @@
-1. python data.py 生成存储数据的db文件
-2. python server.py启动服务
-3. 访问localhost:5000
+1. 下载依赖
+
+   ```python
+   pip install flask pandas openpyxl sqlite3
+   ```
+   
+2.  生成存储数据的db文件
+
+   ```
+   python data.py
+   ```
+
+3. 启动服务
+
+   ```
+   python server.py
+   ```
+
+4. 访问localhost:5000
